@@ -1,20 +1,24 @@
 package com.example.firstspringapp;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hello")
 public class HelloRestController {
     @RequestMapping(value= {"","/","/home"})
-    public String Print()
+    public String PrintSimple()
     {
         return "Hello From Bridgelabz";
     }
-    @RequestMapping(value = {"/query/{name}"}, method = RequestMethod.GET)
-    public String Print(@PathVariable String name)
+
+    @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
+    public String sayHelloParam(@RequestParam(value = "name") String name)
+    {
+        return "Hello " + name + "!";
+    }
+
+    @RequestMapping("/query/{name}")
+    public String PrintPath(@PathVariable String name)
     {
         return "Hello " + name + "!";
     }
